@@ -1,8 +1,8 @@
-## How to add contacts on Apple iPhone 7 ?
+## How to Add Contacts on Apple iPhone 7 ?
 
 Add contacts to save details like name, phone number, email address, and more.
 
-**Assumptions**: *Familiar with iPhone 7 functnality, Comfortable using ios, and Familiar with older iPhones*
+**Assumptions**: *Familiar with iPhone 7 functionality, comfortable using ios, and familiar with older iPhones*
 
 To add contacts, perform the following steps:
 
