@@ -2,7 +2,7 @@
 
 Add contacts to save details like name, phone number, email address, and more.
 
-**Assumptions**: *Familiar with iPhone 7 functionality, comfortable using ios, and familiar with older iPhones*
+***Assumptions***: *Familiar with iPhone 7 functionality, comfortable using ios, and familiar with older iPhones*
 
 To add contacts, perform the following steps:
 
