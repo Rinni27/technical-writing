@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pet API Guide</title>
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 12pt;
+      color: #1a1a1a;
+      background: #fff;
+    }
+
+    /* ─── Print Page Setup ─────────────────────────────────── */
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    /* ─── Page Wrapper ─────────────────────────────────────── */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 0;
+      page-break-after: always;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── Header ───────────────────────────────────────────── */
+    .page-header {
+      background: #003580;
+      color: #fff;
+      padding: 14px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10pt;
+      letter-spacing: 0.5px;
+    }
+    .page-header .logo-text {
+      font-size: 13pt;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .page-header .header-right {
+      font-size: 9pt;
+      opacity: 0.85;
+      text-align: right;
+    }
+
+    /* ─── Footer ───────────────────────────────────────────── */
+    .page-footer {
+      background: #003580;
+      color: #fff;
+      padding: 10px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9pt;
+      margin-top: auto;
+    }
+    .page-footer a { color: #90caf9; text-decoration: none; }
+
+    /* ─── Content Body ─────────────────────────────────────── */
+    .page-body {
+      padding: 28px 42px 20px 42px;
+      flex: 1;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       COVER PAGE
+    ═══════════════════════════════════════════════════════ */
+    .cover-page {
+      background: linear-gradient(160deg, #001f5c 0%, #003580 50%, #0055b3 100%);
+      width: 210mm;
+      min-height: 297mm;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      page-break-after: always;
+      padding: 0;
+    }
+
+    .cover-top-bar {
+      width: 100%;
+      background: rgba(255,255,255,0.07);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    .cover-top-bar .brand {
+      color: #fff;
+      font-size: 13pt;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    .cover-top-bar .version-badge {
+      background: #ffb300;
+      color: #001f5c;
+      font-size: 9pt;
+      font-weight: bold;
+      padding: 4px 12px;
+      border-radius: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .cover-center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px 50px;
+    }
+
+    /* Infographic Icon Grid */
+    .infographic {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .infographic-card {
+      background: rgba(255,255,255,0.10);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 14px;
+      padding: 18px 22px;
+      text-align: center;
+      width: 100px;
+      backdrop-filter: blur(4px);
+    }
+    .infographic-card .method-badge {
+      font-size: 11pt;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 8px;
+      display: inline-block;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    .badge-get  { background: #43a047; color: #fff; }
+    .badge-post { background: #1e88e5; color: #fff; }
+    .badge-put  { background: #fb8c00; color: #fff; }
+    .badge-del  { background: #e53935; color: #fff; }
+
+    .infographic-card .method-label {
+      font-size: 8pt;
+      color: rgba(255,255,255,0.80);
+      line-height: 1.4;
+    }
+
+    /* Divider line */
+    .cover-divider {
+      width: 80px;
+      height: 4px;
+      background: #ffb300;
+      border-radius: 2px;
+      margin: 0 auto 24px auto;
+    }
+
+    .cover-title {
+      font-size: 30pt;
+      font-weight: bold;
+      color: #ffffff;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .cover-subtitle {
+      font-size: 14pt;
+      color: #90caf9;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+    .cover-endpoint {
+      font-family: 'Courier New', monospace;
+      font-size: 10pt;
+      color: #ffb300;
+      background: rgba(0,0,0,0.25);
+      padding: 6px 18px;
+      border-radius: 6px;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    /* Stats row */
+    .cover-stats {
+      display: flex;
+      gap: 36px;
+      margin-top: 36px;
+      justify-content: center;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 26pt;
+      font-weight: bold;
+      color: #ffb300;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 8.5pt;
+      color: rgba(255,255,255,0.75);
+      margin-top: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Audience tags */
+    .cover-audience {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .audience-tag {
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.85);
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 8.5pt;
+      letter-spacing: 0.5px;
+    }
+
+    .cover-bottom-bar {
+      width: 100%;
+      background: rgba(0,0,0,0.25);
+      padding: 14px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .cover-bottom-bar span {
+      color: rgba(255,255,255,0.65);
+      font-size: 9pt;
+    }
+    .cover-bottom-bar .confidential {
+      background: rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.75);
+      padding: 3px 12px;
+      border-radius: 10px;
+      font-size: 8pt;
+      letter-spacing: 0.5px;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       TOC PAGE
+    ═══════════════════════════════════════════════════════ */
+    .toc-title {
+      font-size: 20pt;
+      color: #003580;
+      font-weight: bold;
+      border-bottom: 3px solid #003580;
+      padding-bottom: 8px;
+      margin-bottom: 28px;
+    }
+    .toc-section-group {
+      margin-bottom: 18px;
+    }
+    .toc-group-label {
+      font-size: 9pt;
+      font-weight: bold;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+    .toc-entry {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 12px;
+      border-radius: 6px;
+      margin-bottom: 4px;
+    }
+    .toc-entry:hover { background: #f0f4ff; }
+    .toc-entry-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .toc-method {
+      font-size: 8pt;
+      font-weight: bold;
+      padding: 3px 8px;
+      border-radius: 5px;
+      min-width: 46px;
+      text-align: center;
+    }
+    .toc-entry-title { font-size: 11pt; color: #1a1a1a; }
+    .toc-dots {
+      flex: 1;
+      border-bottom: 1.5px dotted #bbb;
+      margin: 0 10px;
+    }
+    .toc-page { font-size: 10pt; color: #555; }
+
+    /* ═══════════════════════════════════════════════════════
+       CONTENT PAGES
+    ═══════════════════════════════════════════════════════ */
+
+    /* Section Title */
+    .section-title {
+      font-size: 18pt;
+      color: #003580;
+      font-weight: bold;
+      border-bottom: 3px solid #003580;
+      padding-bottom: 8px;
+      margin-bottom: 22px;
+    }
+
+    /* Endpoint Card */
+    .endpoint-card {
+      border: 1.5px solid #d0dff5;
+      border-radius: 10px;
+      margin-bottom: 32px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,53,128,0.07);
+    }
+
+    .endpoint-header {
+      background: #003580;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .endpoint-header .method {
+      font-size: 11pt;
+      font-weight: bold;
+      padding: 5px 14px;
+      border-radius: 7px;
+      letter-spacing: 1px;
+      min-width: 64px;
+      text-align: center;
+    }
+    .method-get  { background: #43a047; color: #fff; }
+    .method-post { background: #1e88e5; color: #fff; }
+    .method-put  { background: #fb8c00; color: #fff; }
+    .method-del  { background: #e53935; color: #fff; }
+
+    .endpoint-header .endpoint-path {
+      font-family: 'Courier New', monospace;
+      font-size: 12pt;
+      color: #fff;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    .endpoint-body { padding: 20px 24px; }
+
+    .endpoint-description {
+      font-size: 11pt;
+      color: #333;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    /* Sub-heading inside card */
+    .sub-heading {
+      font-size: 11pt;
+      font-weight: bold;
+      color: #003580;
+      margin: 16px 0 8px 0;
+      padding-left: 8px;
+      border-left: 4px solid #003580;
+    }
+
+    /* Parameters Table */
+    .param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10.5pt;
+      margin-bottom: 4px;
+    }
+    .param-table th {
+      background: #003580;
+      color: #fff;
+      padding: 8px 12px;
+      text-align: left;
+      font-size: 10pt;
+    }
+    .param-table td {
+      padding: 7px 12px;
+      border-bottom: 1px solid #e3eaf5;
+      vertical-align: top;
+    }
+    .param-table tr:nth-child(even) td { background: #f5f8ff; }
+    .required-badge {
+      font-size: 8pt;
+      background: #e53935;
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+    }
+    .optional-badge {
+      font-size: 8pt;
+      background: #90a4ae;
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+    }
+
+    /* Code Block */
+    .code-block {
+      background: #0d1117;
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin: 10px 0 14px 0;
+      overflow-x: auto;
+      position: relative;
+    }
+    .code-block-label {
+      font-size: 8pt;
+      color: #90caf9;
+      font-family: Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .code-block pre {
+      font-family: 'Courier New', monospace;
+      font-size: 10pt;
+      font-style: italic;
+      color: #000000;
+      background: #f5f5f5;
+      border: 1.5px solid #d0d7de;
+      border-radius: 6px;
+      padding: 14px 16px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      line-height: 1.6;
+    }
+    /* Override the dark wrapper for cleaner look */
+    .code-block {
+      background: transparent;
+      padding: 0;
+    }
+
+    /* Response Table */
+    .response-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10.5pt;
+      margin-top: 6px;
+    }
+    .response-table th {
+      background: #003580;
+      color: #fff;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .response-table td {
+      padding: 7px 12px;
+      border-bottom: 1px solid #e3eaf5;
+    }
+    .response-table tr:nth-child(even) td { background: #f5f8ff; }
+    .status-200 { color: #2e7d32; font-weight: bold; }
+    .status-400 { color: #e65100; font-weight: bold; }
+    .status-404 { color: #c62828; font-weight: bold; }
+    .status-405 { color: #6a1b9a; font-weight: bold; }
+
+    /* Callout / Note box */
+    .note-box {
+      background: #e3f2fd;
+      border-left: 4px solid #1e88e5;
+      padding: 10px 16px;
+      border-radius: 0 6px 6px 0;
+      font-size: 10pt;
+      color: #1a237e;
+      margin: 14px 0;
+    }
+
+    /* Divider */
+    .section-divider {
+      border: none;
+      border-top: 2px solid #e3eaf5;
+      margin: 28px 0;
+    }
+
+    /* ─── Summary Table Page ─── */
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10.5pt;
+    }
+    .summary-table th {
+      background: #003580;
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+    }
+    .summary-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #d0dff5;
+      vertical-align: middle;
+    }
+    .summary-table tr:nth-child(even) td { background: #f5f8ff; }
+
+    /* Print helpers */
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { page-break-after: always; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     COVER PAGE
+═══════════════════════════════════════════ -->
+<div class="cover-page">
+
+  <div class="cover-top-bar">
+    <div class="brand">🐾 PETSTORE API</div>
+    <div class="version-badge">v3.0 · 2024</div>
+  </div>
+
+  <div class="cover-center">
+
+    <!-- Infographic Method Cards -->
+    <div class="infographic">
+      <div class="infographic-card">
+        <div class="method-badge badge-get">GET</div>
+        <div class="method-label">Retrieve<br/>Pet Data</div>
+      </div>
+      <div class="infographic-card">
+        <div class="method-badge badge-post">POST</div>
+        <div class="method-label">Create<br/>New Pet</div>
+      </div>
+      <div class="infographic-card">
+        <div class="method-badge badge-put">PUT</div>
+        <div class="method-label">Update<br/>Pet Info</div>
+      </div>
+      <div class="infographic-card">
+        <div class="method-badge badge-del">DEL</div>
+        <div class="method-label">Remove<br/>Pet Record</div>
+      </div>
+    </div>
+
+    <div class="cover-divider"></div>
+
+    <div class="cover-title">Pet API Guide</div>
+    <div class="cover-subtitle">Complete Developer Reference &amp; Integration Manual</div>
+    <div class="cover-endpoint">[petstore3.swagger.io](https://petstore3.swagger.io/api/v3)</div>
+
+    <!-- Stats -->
+    <div class="cover-stats">
+      <div class="stat-item">
+        <div class="stat-number">7</div>
+        <div class="stat-label">API Endpoints</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4</div>
+        <div class="stat-label">HTTP Methods</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">REST</div>
+        <div class="stat-label">Architecture</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">JSON</div>
+        <div class="stat-label">Data Format</div>
+      </div>
+    </div>
+
+    <!-- Audience -->
+    <div class="cover-audience">
+      <div class="audience-tag">👩‍💻 Developers</div>
+      <div class="audience-tag">🔗 Integration Teams</div>
+      <div class="audience-tag">🛒 End Customers</div>
+      <div class="audience-tag">🧪 QA Engineers</div>
+    </div>
+
+  </div>
+
+  <div class="cover-bottom-bar">
+    <span>Petstore API Documentation · Pet Module</span>
+    <span>Prepared: 2024</span>
+    <span class="confidential">FOR DISTRIBUTION</span>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 2 — TABLE OF CONTENTS
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="logo-text">🐾 PETSTORE API</div>
+    <div class="header-right">Pet API Guide · v3.0<br/>petstore3.swagger.io</div>
+  </div>
+
+  <div class="page-body">
+    <div class="toc-title">Table of Contents</div>
+
+    <div class="toc-section-group">
+      <div class="toc-group-label">Introduction</div>
+      <div class="toc-entry">
+        <div class="toc-entry-left">
+          <div class="toc-entry-title">Overview &amp; Base URL</div>
+        </div>
+        <div class="toc-dots"></div>
+        <div class="toc-page">3</div>
+      </div>
+      <div class="toc-entry">
+        <div class="toc-entry-left">
+          <div class="toc-entry-title">Authentication</div>
+        </div>
+        <div class="toc-dots"></div>
+        <div class="toc-page">3</div>
+      </div>
+      <div class="toc-entry">
+        <div class="toc-entry-left">
+          <div class="toc-entry-title">Request &amp; Response Format</div>
+        </div>
+        <div class="toc-dots"></div>
+        <div class="toc-page">3</div>
+      </div>
+    </div>
+
+    <div class="toc-section-group">
+      <div class="toc-group-label">Pet Endpoints — POST &amp; PUT</div>
+      <div class="toc-entry">
+        <div class="toc-entry-left">
+          <span class="toc-method method-post">POST</span>
+          <div class="toc-entry-title">Add a New Pet &nbsp;<code>/pet</code></div>
+        </div>
+        <div class="toc-dots"></div>
+        <div class="toc-page">4</div>
+      </div>
+      <div class="toc-entry">
+        <div class="toc-entry-left">
+          <span class="toc-method method-put">PUT</span>
+          <div class="toc-entry-title">Update an Existing Pet &nbsp;<code>/pet</code></div>
+        </div>
+        <div class="toc-dots"></div>
+        <div class="toc-page">4</div>
+      </div>
+    </div>
+
+    <div class="toc-section-group">
+      <div class="toc-group-label">Pet Endpoints — GET</div>
+      <div class="toc-entry">
+        <div class="toc-entry-left">
+          <span class="toc-method method-get">GET</span>
+          <div class="toc-entry-title">Find Pets by Status &nbsp;<code>/pet/findByStatus</code></div>
+        </div>
+        <div class="toc-dots"></div>
+        <div class="toc-page">5</div>
+      </div>
+      <div class="toc-entry">
+        <div class="toc-entry-left">
+          <span class="toc-method method-get">GET</span>
+          <div class="toc-entry-title">Find Pets by Tags &nbsp;<code>/pet/findByTags</code></div>
+        </div>
+        <div class="toc-dots"></div>
+        <div class="toc-page">5</div>
+      </div>
+      <div class="toc-entry">
+        <div class="toc-entry-left">
+          <span class="toc-method method-get">GET</span>
+          <div class="toc-entry-title">Find Pet by ID &nbsp;<code>/pet/{petId}</code></div>
+        </div>
+        <div class="toc-dots"></div>
+        <div class="toc-page">6</div>
+      </div>
+    </div>
+
+    <div class="toc-section-group">
+      <div class="toc-group-label">Pet Endpoints — POST (Form) &amp; DELETE</div>
+      <div class="toc-entry">
+        <div class="toc-entry-left">
+          <span class="toc-method method-post">POST</span>
+          <div class="toc-entry-title">Update Pet with Form Data &nbsp;<code>/pet/{petId}</code></div>
+        </div>
+        <div class="toc-dots"></div>
+        <div class="toc-page">6</div>
+      </div>
+      <div class="toc-entry">
+        <div class="toc-entry-left">
+          <span class="toc-method method-del">DEL</span>
+          <div class="toc-entry-title">Delete a Pet &nbsp;<code>/pet/{petId}</code></div>
+        </div>
+        <div class="toc-dots"></div>
+        <div class="toc-page">7</div>
+      </div>
+    </div>
+
+    <div class="toc-section-group">
+      <div class="toc-group-label">Reference</div>
+      <div class="toc-entry">
+        <div class="toc-entry-left">
+          <div class="toc-entry-title">API Endpoint Summary Table</div>
+        </div>
+        <div class="toc-dots"></div>
+        <div class="toc-page">7</div>
+      </div>
+      <div class="toc-entry">
+        <div class="toc-entry-left">
+          <div class="toc-entry-title">Pet Schema / Data Model</div>
+        </div>
+        <div class="toc-dots"></div>
+        <div class="toc-page">8</div>
+      </div>
+      <div class="toc-entry">
+        <div class="toc-entry-left">
+          <div class="toc-entry-title">HTTP Status Code Reference</div>
+        </div>
+        <div class="toc-dots"></div>
+        <div class="toc-page">8</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>© 2024 Petstore API · Pet Module</span>
+    <span>petstore3.swagger.io/api/v3</span>
+    <span>Page 2</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 3 — OVERVIEW & AUTH
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="logo-text">🐾 PETSTORE API</div>
+    <div class="header-right">Pet API Guide · v3.0<br/>petstore3.swagger.io</div>
+  </div>
+
+  <div class="page-body">
+    <div class="section-title">Overview</div>
+
+    <p style="font-size:11pt; line-height:1.7; color:#333; margin-bottom:16px;">
+      The <strong>Petstore Pet API</strong> provides a RESTful interface to manage pet records in the store.
+      It supports full CRUD operations — allowing you to create, retrieve, update, and delete pet entries
+      using standard HTTP methods. This guide is designed for both <strong>end customers</strong> exploring
+      the capabilities of the platform and <strong>developers</strong> integrating with it programmatically.
+    </p>
+
+    <div class="note-box">
+      <strong>Base URL:</strong> All API requests must be prefixed with the base URL below.<br/>
+      <code style="font-family:'Courier New',monospace; font-style:italic; font-size:11pt;">
+        [petstore3.swagger.io](https://petstore3.swagger.io/api/v3)
+      </code>
+    </div>
+
+    <hr class="section-divider"/>
+
+    <div class="section-title">Authentication</div>
+    <p style="font-size:11pt; line-height:1.7; color:#333; margin-bottom:12px;">
+      Certain endpoints (such as <strong>DELETE /pet/{petId}</strong>) accept an optional
+      <code style="font-family:'Courier New',monospace; font-style:italic;">api_key</code> header for authorization.
+      While the Petstore demo environment does not enforce authentication on most routes,
+      production deployments should use the <strong>OAuth 2.0</strong> or <strong>API Key</strong>
+      mechanisms described below.
+    </p>
+
+    <table class="param-table">
+      <tr>
+        <th>Auth Type</th><th>Header / Field</th><th>Example</th>
+      </tr>
+      <tr>
+        <td>API Key</td>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">api_key</code> (header)</td>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">api_key: special-key</code></td>
+      </tr>
+      <tr>
+        <td>OAuth 2.0</td>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">Authorization</code> (header)</td>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">Bearer &lt;token&gt;</code></td>
+      </tr>
+    </table>
+
+    <hr class="section-divider"/>
+
+    <div class="section-title">Request &amp; Response Format</div>
+    <p style="font-size:11pt; line-height:1.7; color:#333; margin-bottom:12px;">
+      All request and response bodies use <strong>JSON</strong> (preferred) or <strong>XML</strong>.
+      Include the appropriate <code style="font-family:'Courier New',monospace;font-style:italic;">Content-Type</code>
+      and <code style="font-family:'Courier New',monospace;font-style:italic;">Accept</code> headers with each request.
+    </p>
+
+    <div class="code-block">
+      <span class="code-block-label">Request Headers</span>
+      <pre>Content-Type: application/json
+Accept:       application/json</pre>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>© 2024 Petstore API · Pet Module</span>
+    <span>petstore3.swagger.io/api/v3</span>
+    <span>Page 3</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 4 — POST /pet & PUT /pet
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="logo-text">🐾 PETSTORE API</div>
+    <div class="header-right">Pet API Guide · v3.0<br/>petstore3.swagger.io</div>
+  </div>
+
+  <div class="page-body">
+    <div class="section-title">Pet Endpoints</div>
+
+    <!-- POST /pet -->
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="method method-post">POST</span>
+        <span class="endpoint-path">/pet</span>
+      </div>
+      <div class="endpoint-body">
+        <p class="endpoint-description">
+          <strong>Add a New Pet</strong> — Adds a new pet record to the store.
+          The request body must contain the pet's name and at least one photo URL.
+          Returns the created pet object on success.
+        </p>
+
+        <div class="sub-heading">Request Body</div>
+        <div class="code-block">
+          <span class="code-block-label">JSON · application/json</span>
+          <pre>{
+  "id": 12345,
+  "name": "Rover",
+  "category": { "id": 1, "name": "Dogs" },
+  "photoUrls": ["[example.com](https://example.com/rover.jpg)"],
+  "tags": [{ "id": 1, "name": "friendly" }],
+  "status": "available"
+}</pre>
+        </div>
+
+        <div class="sub-heading">Responses</div>
+        <table class="response-table">
+          <tr><th>Status</th><th>Meaning</th><th>Notes</th></tr>
+          <tr><td class="status-200">200 OK</td><td>Pet added successfully</td><td>Returns the pet object</td></tr>
+          <tr><td class="status-400">400</td><td>Invalid input</td><td>Check required fields</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- PUT /pet -->
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="method method-put">PUT</span>
+        <span class="endpoint-path">/pet</span>
+      </div>
+      <div class="endpoint-body">
+        <p class="endpoint-description">
+          <strong>Update an Existing Pet</strong> — Updates an existing pet's data.
+          The <code style="font-family:'Courier New',monospace;font-style:italic;">id</code> field
+          in the request body must match an existing pet record.
+        </p>
+
+        <div class="sub-heading">Request Body</div>
+        <div class="code-block">
+          <span class="code-block-label">JSON · application/json</span>
+          <pre>{
+  "id": 12345,
+  "name": "Rover Updated",
+  "category": { "id": 1, "name": "Dogs" },
+  "photoUrls": ["[example.com](https://example.com/rover2.jpg)"],
+  "tags": [{ "id": 2, "name": "energetic" }],
+  "status": "sold"
+}</pre>
+        </div>
+
+        <div class="sub-heading">Responses</div>
+        <table class="response-table">
+          <tr><th>Status</th><th>Meaning</th><th>Notes</th></tr>
+          <tr><td class="status-200">200 OK</td><td>Pet updated successfully</td><td>Returns updated pet object</td></tr>
+          <tr><td class="status-400">400</td><td>Invalid ID supplied</td><td>Verify the pet ID is a valid integer</td></tr>
+          <tr><td class="status-404">404</td><td>Pet not found</td><td>No pet matches the given ID</td></tr>
+          <tr><td class="status-405">405</td><td>Validation exception</td><td>Data failed server-side validation</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>© 2024 Petstore API · Pet Module</span>
+    <span>petstore3.swagger.io/api/v3</span>
+    <span>Page 4</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 5 — GET findByStatus & findByTags
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="logo-text">🐾 PETSTORE API</div>
+    <div class="header-right">Pet API Guide · v3.0<br/>petstore3.swagger.io</div>
+  </div>
+
+  <div class="page-body">
+
+    <!-- GET /pet/findByStatus -->
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="method method-get">GET</span>
+        <span class="endpoint-path">/pet/findByStatus</span>
+      </div>
+      <div class="endpoint-body">
+        <p class="endpoint-description">
+          <strong>Find Pets by Status</strong> — Returns a list of pets filtered by their availability status.
+          Multiple status values can be provided using repeated query parameters.
+        </p>
+
+        <div class="sub-heading">Query Parameters</div>
+        <table class="param-table">
+          <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr>
+            <td><code style="font-family:'Courier New',monospace;font-style:italic;">status</code></td>
+            <td>string</td>
+            <td><span class="required-badge">Required</span></td>
+            <td>Filter by status: <code style="font-family:'Courier New',monospace;font-style:italic;">available</code>,
+              <code style="font-family:'Courier New',monospace;font-style:italic;">pending</code>,
+              <code style="font-family:'Courier New',monospace;font-style:italic;">sold</code></td>
+          </tr>
+        </table>
+
+        <div class="sub-heading">Example Request</div>
+        <div class="code-block">
+          <pre>GET /pet/findByStatus?status=available</pre>
+        </div>
+
+        <div class="sub-heading">Example Response (200 OK)</div>
+        <div class="code-block">
+          <pre>[
+  {
+    "id": 12345,
+    "name": "Rover",
+    "status": "available",
+    "photoUrls": ["[example.com](https://example.com/rover.jpg)"]
+  },
+  {
+    "id": 67890,
+    "name": "Bella",
+    "status": "available",
+    "photoUrls": ["[example.com](https://example.com/bella.jpg)"]
+  }
+]</pre>
+        </div>
+
+        <div class="sub-heading">Responses</div>
+        <table class="response-table">
+          <tr><th>Status</th><th>Meaning</th></tr>
+          <tr><td class="status-200">200 OK</td><td>Successful — returns array of pets</td></tr>
+          <tr><td class="status-400">400</td><td>Invalid status value supplied</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- GET /pet/findByTags -->
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="method method-get">GET</span>
+        <span class="endpoint-path">/pet/findByTags</span>
+      </div>
+      <div class="endpoint-body">
+        <p class="endpoint-description">
+          <strong>Find Pets by Tags</strong> — Returns pets that match one or more specified tags.
+          Tag values are passed as repeated query parameters.
+        </p>
+
+        <div class="sub-heading">Query Parameters</div>
+        <table class="param-table">
+          <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr>
+            <td><code style="font-family:'Courier New',monospace;font-style:italic;">tags</code></td>
+            <td>array[string]</td>
+            <td><span class="required-badge">Required</span></td>
+            <td>One or more tag names to filter by</td>
+          </tr>
+        </table>
+
+        <div class="sub-heading">Example Request</div>
+        <div class="code-block">
+          <pre>GET /pet/findByTags?tags=friendly&amp;tags=energetic</pre>
+        </div>
+
+        <div class="sub-heading">Responses</div>
+        <table class="response-table">
+          <tr><th>Status</th><th>Meaning</th></tr>
+          <tr><td class="status-200">200 OK</td><td>Successful — returns array of matching pets</td></tr>
+          <tr><td class="status-400">400</td><td>Invalid tag value supplied</td></tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>© 2024 Petstore API · Pet Module</span>
+    <span>petstore3.swagger.io/api/v3</span>
+    <span>Page 5</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 6 — GET /pet/{petId} & POST /pet/{petId}
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="logo-text">🐾 PETSTORE API</div>
+    <div class="header-right">Pet API Guide · v3.0<br/>petstore3.swagger.io</div>
+  </div>
+
+  <div class="page-body">
+
+    <!-- GET /pet/{petId} -->
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="method method-get">GET</span>
+        <span class="endpoint-path">/pet/{petId}</span>
+      </div>
+      <div class="endpoint-body">
+        <p class="endpoint-description">
+          <strong>Find Pet by ID</strong> — Retrieves a single pet by its unique numeric ID.
+        </p>
+
+        <div class="sub-heading">Path Parameters</div>
+        <table class="param-table">
+          <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr>
+            <td><code style="font-family:'Courier New',monospace;font-style:italic;">petId</code></td>
+            <td>integer (int64)</td>
+            <td><span class="required-badge">Required</span></td>
+            <td>Unique ID of the pet to retrieve</td>
+          </tr>
+        </table>
+
+        <div class="sub-heading">Example Request</div>
+        <div class="code-block">
+          <pre>GET /pet/12345</pre>
+        </div>
+
+        <div class="sub-heading">Example Response (200 OK)</div>
+        <div class="code-block">
+          <pre>{
+  "id": 12345,
+  "name": "Rover",
+  "category": { "id": 1, "name": "Dogs" },
+  "photoUrls": ["[example.com](https://example.com/rover.jpg)"],
+  "tags": [{ "id": 1, "name": "friendly" }],
+  "status": "available"
+}</pre>
+        </div>
+
+        <div class="sub-heading">Responses</div>
+        <table class="response-table">
+          <tr><th>Status</th><th>Meaning</th></tr>
+          <tr><td class="status-200">200 OK</td><td>Successful — returns the pet object</td></tr>
+          <tr><td class="status-400">400</td><td>Invalid ID supplied — must be a positive integer</td></tr>
+          <tr><td class="status-404">404</td><td>Pet not found</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- POST /pet/{petId} -->
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="method method-post">POST</span>
+        <span class="endpoint-path">/pet/{petId}</span>
+      </div>
+      <div class="endpoint-body">
+        <p class="endpoint-description">
+          <strong>Update Pet with Form Data</strong> — Updates an existing pet's
+          <code style="font-family:'Courier New',monospace;font-style:italic;">name</code> or
+          <code style="font-family:'Courier New',monospace;font-style:italic;">status</code> using
+          URL-encoded form data rather than a JSON body.
+        </p>
+
+        <div class="sub-heading">Path Parameters</div>
+        <table class="param-table">
+          <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr>
+            <td><code style="font-family:'Courier New',monospace;font-style:italic;">petId</code></td>
+            <td>integer (int64)</td>
+            <td><span class="required-badge">Required</span></td>
+            <td>ID of the pet to update</td>
+          </tr>
+        </table>
+
+        <div class="sub-heading">Form Parameters</div>
+        <table class="param-table">
+          <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr>
+            <td><code style="font-family:'Courier New',monospace;font-style:italic;">name</code></td>
+            <td>string</td>
+            <td><span class="optional-badge">Optional</span></td>
+            <td>Updated name of the pet</td>
+          </tr>
+          <tr>
+            <td><code style="font-family:'Courier New',monospace;font-style:italic;">status</code></td>
+            <td>string</td>
+            <td><span class="optional-badge">Optional</span></td>
+            <td>Updated status: <code style="font-family:'Courier New',monospace;font-style:italic;">available</code>,
+              <code style="font-family:'Courier New',monospace;font-style:italic;">pending</code>,
+              <code style="font-family:'Courier New',monospace;font-style:italic;">sold</code></td>
+          </tr>
+        </table>
+
+        <div class="sub-heading">Example Request</div>
+        <div class="code-block">
+          <pre>POST /pet/12345
+Content-Type: application/x-www-form-urlencoded
+
+name=Rover+Jr&amp;status=pending</pre>
+        </div>
+
+        <div class="sub-heading">Responses</div>
+        <table class="response-table">
+          <tr><th>Status</th><th>Meaning</th></tr>
+          <tr><td class="status-200">200 OK</td><td>Pet updated successfully</td></tr>
+          <tr><td class="status-405">405</td><td>Invalid input — form data failed validation</td></tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>© 2024 Petstore API · Pet Module</span>
+    <span>petstore3.swagger.io/api/v3</span>
+    <span>Page 6</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 7 — DELETE /pet/{petId} & Summary
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="logo-text">🐾 PETSTORE API</div>
+    <div class="header-right">Pet API Guide · v3.0<br/>petstore3.swagger.io</div>
+  </div>
+
+  <div class="page-body">
+
+    <!-- DELETE /pet/{petId} -->
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="method method-del">DELETE</span>
+        <span class="endpoint-path">/pet/{petId}</span>
+      </div>
+      <div class="endpoint-body">
+        <p class="endpoint-description">
+          <strong>Delete a Pet</strong> — Permanently removes a pet record from the store by its ID.
+          An optional <code style="font-family:'Courier New',monospace;font-style:italic;">api_key</code>
+          header can be passed for authorization purposes.
+        </p>
+
+        <div class="sub-heading">Path Parameters</div>
+        <table class="param-table">
+          <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr>
+            <td><code style="font-family:'Courier New',monospace;font-style:italic;">petId</code></td>
+            <td>integer (int64)</td>
+            <td><span class="required-badge">Required</span></td>
+            <td>ID of the pet to delete</td>
+          </tr>
+        </table>
+
+        <div class="sub-heading">Header Parameters</div>
+        <table class="param-table">
+          <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr>
+            <td><code style="font-family:'Courier New',monospace;font-style:italic;">api_key</code></td>
+            <td>string</td>
+            <td><span class="optional-badge">Optional</span></td>
+            <td>API key for authorization</td>
+          </tr>
+        </table>
+
+        <div class="sub-heading">Example Request</div>
+        <div class="code-block">
+          <pre>DELETE /pet/12345
+api_key: special-key</pre>
+        </div>
+
+        <div class="sub-heading">Responses</div>
+        <table class="response-table">
+          <tr><th>Status</th><th>Meaning</th></tr>
+          <tr><td class="status-200">200 OK</td><td>Pet deleted successfully</td></tr>
+          <tr><td class="status-400">400</td><td>Invalid pet ID supplied</td></tr>
+          <tr><td class="status-404">404</td><td>Pet not found</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <hr class="section-divider"/>
+
+    <div class="section-title">API Endpoint Summary</div>
+
+    <table class="summary-table">
+      <tr>
+        <th>Method</th>
+        <th>Endpoint</th>
+        <th>Description</th>
+        <th>Auth Required</th>
+      </tr>
+      <tr>
+        <td><span class="toc-method method-post" style="font-size:8pt;padding:3px 8px;border-radius:4px;">POST</span></td>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">/pet</code></td>
+        <td>Add a new pet</td>
+        <td>Optional</td>
+      </tr>
+      <tr>
+        <td><span class="toc-method method-put" style="font-size:8pt;padding:3px 8px;border-radius:4px;">PUT</span></td>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">/pet</code></td>
+        <td>Update an existing pet</td>
+        <td>Optional</td>
+      </tr>
+      <tr>
+        <td><span class="toc-method method-get" style="font-size:8pt;padding:3px 8px;border-radius:4px;">GET</span></td>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">/pet/findByStatus</code></td>
+        <td>Find pets by status</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><span class="toc-method method-get" style="font-size:8pt;padding:3px 8px;border-radius:4px;">GET</span></td>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">/pet/findByTags</code></td>
+        <td>Find pets by tags</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><span class="toc-method method-get" style="font-size:8pt;padding:3px 8px;border-radius:4px;">GET</span></td>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">/pet/{petId}</code></td>
+        <td>Find pet by ID</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><span class="toc-method method-post" style="font-size:8pt;padding:3px 8px;border-radius:4px;">POST</span></td>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">/pet/{petId}</code></td>
+        <td>Update pet via form data</td>
+        <td>Optional</td>
+      </tr>
+      <tr>
+        <td><span class="toc-method method-del" style="font-size:8pt;padding:3px 8px;border-radius:4px;">DEL</span></td>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">/pet/{petId}</code></td>
+        <td>Delete a pet</td>
+        <td>Optional (api_key)</td>
+      </tr>
+    </table>
+
+  </div>
+
+  <div class="page-footer">
+    <span>© 2024 Petstore API · Pet Module</span>
+    <span>petstore3.swagger.io/api/v3</span>
+    <span>Page 7</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 8 — DATA MODEL & STATUS CODES
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="logo-text">🐾 PETSTORE API</div>
+    <div class="header-right">Pet API Guide · v3.0<br/>petstore3.swagger.io</div>
+  </div>
+
+  <div class="page-body">
+    <div class="section-title">Pet Schema / Data Model</div>
+
+    <p style="font-size:11pt;line-height:1.7;color:#333;margin-bottom:14px;">
+      The following describes the full <strong>Pet</strong> object returned or accepted by the API.
+    </p>
+
+    <table class="param-table">
+      <tr>
+        <th>Field</th><th>Type</th><th>Required</th><th>Description</th>
+      </tr>
+      <tr>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">id</code></td>
+        <td>integer (int64)</td>
+        <td><span class="optional-badge">Optional</span></td>
+        <td>Unique identifier for the pet</td>
+      </tr>
+      <tr>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">name</code></td>
+        <td>string</td>
+        <td><span class="required-badge">Required</span></td>
+        <td>Name of the pet (e.g., "Rover")</td>
+      </tr>
+      <tr>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">category</code></td>
+        <td>object</td>
+        <td><span class="optional-badge">Optional</span></td>
+        <td>Category object: <code style="font-family:'Courier New',monospace;font-style:italic;">{ id, name }</code></td>
+      </tr>
+      <tr>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">photoUrls</code></td>
+        <td>array[string]</td>
+        <td><span class="required-badge">Required</span></td>
+        <td>List of photo URLs for the pet</td>
+      </tr>
+      <tr>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">tags</code></td>
+        <td>array[object]</td>
+        <td><span class="optional-badge">Optional</span></td>
+        <td>List of tag objects: <code style="font-family:'Courier New',monospace;font-style:italic;">[ { id, name } ]</code></td>
+      </tr>
+      <tr>
+        <td><code style="font-family:'Courier New',monospace;font-style:italic;">status</code></td>
+        <td>string (enum)</td>
+        <td><span class="optional-badge">Optional</span></td>
+        <td>Pet availability: <code style="font-family:'Courier New',monospace;font-style:italic;">available</code> | <code style="font-family:'Courier New',monospace;font-style:italic;">pending</code> | <code style="font-family:'Courier New',monospace;font-style:italic;">sold</code></td>
+      </tr>
+    </table>
+
+    <div class="sub-heading">Full Schema Example</div>
+    <div class="code-block">
+      <pre>{
+  "id": 12345,
+  "name": "Rover",
+  "category": {
+    "id": 1,
+    "name": "Dogs"
+  },
+  "photoUrls": [
+    "[example.com](https://example.com/photos/rover_main.jpg)"
+  ],
+  "tags": [
+    { "id": 1, "name": "friendly" },
+    { "id": 2, "name": "trained"  }
+  ],
+  "status": "available"
+}</pre>
+    </div>
+
+    <hr class="section-divider"/>
+
+    <div class="section-title">HTTP Status Code Reference</div>
+
+    <table class="summary-table">
+      <tr>
+        <th>Code</th><th>Name</th><th>Description</th>
+      </tr>
+      <tr>
+        <td class="status-200">200</td>
+        <td>OK</td>
+        <td>Request succeeded. Response body contains the result.</td>
+      </tr>
+      <tr>
+        <td class="status-400">400</td>
+        <td>Bad Request</td>
+        <td>Invalid input — malformed request syntax or missing required fields.</td>
+      </tr>
+      <tr>
+        <td class="status-404">404</td>
+        <td>Not Found</td>
+        <td>The requested resource (pet) does not exist.</td>
+      </tr>
+      <tr>
+        <td class="status-405">405</td>
+        <td>Method Not Allowed</td>
+        <td>HTTP method is not supported for this endpoint.</td>
+      </tr>
+    </table>
+
+    <div class="note-box" style="margin-top:24px;">
+      <strong>Need help?</strong> Visit the interactive Swagger UI at
+      <code style="font-family:'Courier New',monospace;font-style:italic;">
+        [petstore3.swagger.io](https://petstore3.swagger.io)
+      </code>
+      to test endpoints live in your browser.
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>© 2024 Petstore API · Pet Module</span>
+    <span>petstore3.swagger.io/api/v3</span>
+    <span>Page 8</span>
+  </div>
+</div>
+
+</body>
+</html>
