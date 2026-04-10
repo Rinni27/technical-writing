@@ -32,3 +32,9 @@ Touch **Contacts** to return to the contacts list.
 
 12. The new contact appears in the list.
 
+
+
+# API Documentation
+## This API Guide is build from Claude Sonnet 4.6
+### This is initial draft. Ignore the page widths or layouts, but this initial draft is complete in itself with respect to document structure
+- [Pet API Guide](./PetAPI.html)
