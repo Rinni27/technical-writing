@@ -1,0 +1,73 @@
+site_name: Pet API Guide
+site_description: Complete Developer Reference & Integration Manual for the Petstore Pet API
+site_author: Petstore API Team
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+    logo: material/paw
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Overview: getting-started/overview.md
+      - Authentication: getting-started/authentication.md
+      - Request and Response Format: getting-started/request-response.md
+  - Endpoints:
+      - Add a New Pet (POST /pet): endpoints/add-pet.md
+      - Update a Pet (PUT /pet): endpoints/update-pet.md
+      - Find Pets by Status (GET): endpoints/find-by-status.md
+      - Find Pets by Tags (GET): endpoints/find-by-tags.md
+      - Find Pet by ID (GET): endpoints/find-by-id.md
+      - Update Pet with Form Data (POST): endpoints/update-by-form.md
+      - Delete a Pet (DELETE): endpoints/delete-pet.md
+  - Reference:
+      - Endpoint Summary: reference/summary.md
+      - Pet Data Model: reference/data-model.md
+      - HTTP Status Codes: reference/status-codes.md
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  generator: false
+
+copyright: "&copy; 2024 Petstore API · Pet Module"

@@ -1,0 +1,86 @@
+/* Method badges — matches original Petstore brand colors */
+.api-method {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  padding: 4px 14px;
+  border-radius: 6px;
+  color: #fff;
+  font-family: var(--md-code-font-family);
+}
+.api-method.small {
+  font-size: 0.75rem;
+  padding: 2px 10px;
+}
+.api-method.get { background: #43a047; }
+.api-method.post { background: #1e88e5; }
+.api-method.put { background: #fb8c00; }
+.api-method.delete { background: #e53935; }
+
+/* Primary brand color override to match original navy theme */
+:root {
+  --md-primary-fg-color: #003580;
+  --md-primary-fg-color--light: #1e5aa8;
+  --md-primary-fg-color--dark: #001f5c;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #003580;
+}
+
+/* 2) Headings in blue + Arial font (table headings excluded) */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  color: #1565c0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 3) Code blocks in Courier New */
+.md-typeset pre,
+.md-typeset code,
+.md-typeset .highlight pre,
+.md-typeset .highlight code {
+  font-family: "Courier New", Courier, monospace !important;
+}
+
+/* 4) Table headings in blue */
+.md-typeset table thead th {
+  color: #1565c0;
+  font-weight: 600;
+}
+
+/* 4b) Status/HTTP codes inside table cells — same blue as table headings */
+.md-typeset table tbody td code {
+  color: #1565c0;
+}
+
+/* 5) Next-link arrow styling — smaller font, single consistent color (no purple/visited) */
+.next-link {
+  display: inline-block;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  color: #1565c0;
+}
+.next-link a,
+.next-link a:visited {
+  text-decoration: none;
+  color: #1565c0;
+}
+
+/* 6) Subtle underline slide-in on hover for all content links */
+.md-typeset a {
+  position: relative;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1.5px;
+  transition: background-size 0.25s ease-in-out;
+}
+.md-typeset a:hover {
+  background-size: 100% 1.5px;
+}
