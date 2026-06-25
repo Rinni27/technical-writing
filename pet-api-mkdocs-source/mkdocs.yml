@@ -1,6 +1,8 @@
 site_name: Pet API Guide
-site_description: Complete Developer Reference & Integration Manual for the Petstore Pet API
-site_author: Petstore API Team
+site_description: Complete Developer Reference and Integration Manual for the Petstore Pet API
+site_author: Rinni Mahajan
+
+copyright: "© 2026 Rinni Mahajan. All rights reserved."
 
 theme:
   name: material
@@ -70,4 +72,4 @@ extra_css:
 extra:
   generator: false
 
-copyright: "&copy; 2024 Petstore API · Pet Module"
+copyright: "&copy; 2026 Rinni Mahajan"
