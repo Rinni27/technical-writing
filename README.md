@@ -138,3 +138,26 @@ Touch **Contacts** to return to the contacts list.
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**📄 Copyright**
+
+© 2026 Rinni Mahajan. All Rights Reserved.
+
+The content, documentation, code samples, and writing in this repository are provided for portfolio and evaluation purposes only. Reproduction, redistribution, or commercial use without prior written permission is prohibited.
