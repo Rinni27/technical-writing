@@ -1,14 +1,20 @@
 # About Me- Rinni Mahajan
 
 AI-Enabled Lead Technical Writer with 11+ Years of experience turning complex technical jargon into Documentation that Developers actually use. Now, I am supercharged by AI. 
-Refer my 🔗 Portfolio Website: [https://myapp.com](https://claude.ai/public/artifacts/b274bb80-9d83-4c57-a179-32ec22d4ada5)
+
+| Resource | Link |
+|----------|------|
+|🔗 Portfolio Website | [https://rinnimahajan.com](https://rinnimahajan.netlify.app/) |
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 # Details of my Professional Work
 You can find complete details of my professional Dossier here:
-🔗 Portfolio Website: [https://myapp.com](https://claude.ai/public/artifacts/b274bb80-9d83-4c57-a179-32ec22d4ada5)
+
+| Resource | Link |
+|----------|------|
+|🔗 Portfolio Website | [https://rinnimahajan.com](https://rinnimahajan.netlify.app/) |
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------
