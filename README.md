@@ -5,7 +5,8 @@ AI-Enabled Lead Technical Writer with 11+ Years of experience turning complex te
 | Resource | Link |
 |----------|------|
 |🔗 Portfolio Website | [https://rinnimahajan.com](https://rinnimahajan.netlify.app/) |
-
+|🔗 Portfolio Website- Lead Roles | [https://rinnimahajan.com](https://rinnimahajan.netlify.app/leadership) |
+|🔗 Portfolio Website- IC Roles | [https://rinnimahajan.com](https://rinnimahajan.netlify.app/ic) |
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -15,6 +16,8 @@ You can find complete details of my professional Dossier here:
 | Resource | Link |
 |----------|------|
 |🔗 Portfolio Website | [https://rinnimahajan.com](https://rinnimahajan.netlify.app/) |
+|🔗 Portfolio Website- Lead Roles | [https://rinnimahajan.com](https://rinnimahajan.netlify.app/leadership) |
+|🔗 Portfolio Website- IC Roles | [https://rinnimahajan.com](https://rinnimahajan.netlify.app/ic) |
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------
