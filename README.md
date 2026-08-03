@@ -1,6 +1,6 @@
 # About Me- Rinni Mahajan
 
-AI-Enabled Lead Technical Writer with 11+ Years of experience turning complex technical jargon into Documentation that Developers actually use. Now, I am supercharged by AI. 
+Senior Documentation Engineer with 12 Years of experience turning complex technical jargon into Documentation that Developers actually use. Now, I am supercharged by AI. 
 
 | Resource | Link |
 |----------|------|
@@ -91,7 +91,7 @@ Touch **Contacts** to return to the contacts list.
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 
-## 🤖 *AI Agent DeckCaster*
+## 🤖 *AI powered Documentation Agent DeckCaster*
 
 - DeckCaster allows you to drop files in following formats: .PDF, .PPTX, .XML, .JSON, .HTML and gives you narrated MP4, which you can push into your GitHub repository.
 
