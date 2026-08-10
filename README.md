@@ -90,6 +90,35 @@ Touch **Contacts** to return to the contacts list.
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
+## 💬 *RAG That Actually Answers*
+### 💬 **Ask the Docs — RAG-Powered Documentation Assistant**
+
+- An AI assistant embedded directly in the Mkdocs API documentation portal that answers developer questions grounded strictly in the docs — with confidence scoring, source citations, and an auto-generated FAQ.
+
+### Complete MVP
+- ChromaDB for local vector search — docs chunked by section and embedded with no external embedding API or cost
+- Claude API for grounded answer generation and the auto-generated FAQ
+- Streamlit for the UI, deployed on Streamlit Community Cloud
+- Claude Code for the full build: ingestion pipeline, retrieval logic, UI, deployment, and native MkDocs embedding
+
+### Features
+- Answers are generated only from retrieved documentation content — the assistant declines to answer rather than guessing when the docs don't cover something
+- 🟢🟡🔴 confidence badge on every answer, based on how well the retrieved content actually matched the question
+- Source citations linking straight back to the exact section on the live docs site
+- Conversation memory, so natural follow-up questions work within a session
+- 👍/👎 feedback logged on every answer — a real signal for which docs need work
+- One-click auto-generated FAQ, regenerable any time the docs change
+- Natively embedded inside the MkDocs portal via iframe — not a separate tool visitors have to go find
+
+| Resource | Link |
+|----------|------|
+| 🌐 Live Assistant (embedded) | [Ask the Docs](./pet-api-docs/ask-the-docs/) |
+| 🌐 Standalone App | [Open App](https://technical-writing-rinni27.streamlit.app/) |
+| 💻 Source Code | [View Repository](https://github.com/Rinni27/technical-writing/tree/main/pet-api-rag-assistant) |
+| 📄 Project README | [Read More](./pet-api-rag-assistant/README.md) |
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 🤖 *AI powered Documentation Agent DeckCaster*
 
