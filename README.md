@@ -85,7 +85,7 @@ Touch **Contacts** to return to the contacts list.
 | Resource | Link |
 |----------|------|
 | 🌐 Live Documentation | [Open Portal](./pet-api-docs/) |
-| 💻 Source Code | [View Repository](https://github.com/Rinni27/technical-writing/tree/main/pet-api-mkdocs-source) | 
+| 💻 Source Code | [View Repository](https://github.com/Rinni27/technical-writing/tree/gh-pages/pet-api-mkdocs-source) | 
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ Touch **Contacts** to return to the contacts list.
 |----------|------|
 | 🌐 Live Assistant (embedded) | [Ask the Docs](./pet-api-docs/ask-the-docs/) |
 | 🌐 Standalone App | [Open App](https://technical-writing-rinni27.streamlit.app/) |
-| 💻 Source Code | [View Repository](https://github.com/Rinni27/technical-writing/tree/main/pet-api-rag-assistant) |
+| 💻 Source Code | [View Repository](https://github.com/Rinni27/technical-writing/tree/gh-pages/pet-api-rag-assistant) |
 | 📄 Project README | [Read More](./pet-api-rag-assistant/README.md) |
 
 
