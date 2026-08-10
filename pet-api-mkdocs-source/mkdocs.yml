@@ -49,7 +49,7 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Ask the Docs (AI Assistant): https://technical-writing-rinni27.streamlit.app/
+  - Ask the Docs (AI Assistant): ask-the-docs.md
   - Getting Started:
       - Overview: getting-started/overview.md
       - Authentication: getting-started/authentication.md
