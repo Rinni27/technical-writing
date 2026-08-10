@@ -81,7 +81,8 @@ def chunk_markdown_file(path: Path):
     return chunks
 
 
-def main():
+def build_index():
+    """Chunk all docs and (re)build the ChromaDB collection from scratch."""
     md_files = sorted(DOCS_DIR.rglob("*.md"))
     print(f"Found {len(md_files)} markdown files under {DOCS_DIR}")
 
@@ -120,7 +121,8 @@ def main():
     )
 
     print(f"Indexed {collection.count()} chunks into ChromaDB at {CHROMA_DIR}")
+    return collection
 
 
 if __name__ == "__main__":
-    main()
+    build_index()

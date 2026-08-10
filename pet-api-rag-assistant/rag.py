@@ -54,6 +54,15 @@ def get_collection():
     if _collection is None:
         _chroma_client = chromadb.PersistentClient(path=str(CHROMA_DIR))
         embedding_fn = embedding_functions.DefaultEmbeddingFunction()
+
+        existing = {c.name for c in _chroma_client.list_collections()}
+        if COLLECTION_NAME not in existing:
+            # First run on a fresh checkout (e.g. a new cloud deployment) —
+            # the vector index isn't committed to git, so build it now.
+            from ingest import build_index
+
+            build_index()
+
         _collection = _chroma_client.get_collection(
             name=COLLECTION_NAME,
             embedding_function=embedding_fn,
